@@ -1,0 +1,13 @@
+.previe {
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 400px;
+}
+
+.container {
+    overflow: hidden;
+}
+
+.bodyCard {
+    min-height: 100px;
+}

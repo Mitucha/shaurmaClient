@@ -1,0 +1,23 @@
+.logoContant {
+    font-family: 'Intro';
+    display: inline;
+    margin-left: 5px;
+}
+
+.logoImg {
+    width: 50px;
+}
+
+.logoText {
+    color: #ffde00;
+}
+
+@font-face {
+    font-family: 'Intro';
+    src: local('Intro Black Alt'), local('Intro-Black-Alt'),
+        url('Intro-Black-Alt.woff2') format('woff2'),
+        url('Intro-Black-Alt.woff') format('woff'),
+        url('Intro-Black-Alt.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+  }
