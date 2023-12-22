@@ -10,7 +10,14 @@ export default class BlockStore {
         this._block = block.sort((x, y) => x.id - y.id)
     }
 
+    setOneBlock(block) {
+        //const {block} = obj
+        this._block.push(block)
+    }
+
     get block() {
         return this._block
     }
+
+    
 }
