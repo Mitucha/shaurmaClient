@@ -8,13 +8,14 @@ import { observer } from "mobx-react-lite";
 const AppRouter = observer( () => {
   const {user} = useContext(Context)
   const isAuth = JSON.parse(localStorage.getItem('isAuth'))
+  console.log(isAuth)
   return (
     <>
     <Switch>
       {isAuth && authRoutes.map(({path, Component}) => 
         <Route key={path} path={path} component={Component} exact />
       )}
-      {isAuth === false && dontAuthRoutes.map(({path, Component}) => 
+      {dontAuthRoutes.map(({path, Component}) => 
         <Route key={path} path={path} component={Component} exact />
       )}
     </Switch>

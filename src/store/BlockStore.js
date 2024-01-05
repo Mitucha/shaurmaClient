@@ -15,6 +15,10 @@ export default class BlockStore {
         this._block.push(block)
     }
 
+    deleteBlock(id) {
+        this._block = this._block.filter(x => x.id != id)
+    }
+
     get block() {
         return this._block
     }

@@ -1,22 +1,8 @@
-import { useState, useContext, useEffect } from "react";
-import { getAll } from "../http/CourseAPI";
-import { Context } from "../main";
-import Nav from 'react-bootstrap/Nav';
-import Tab from "react-bootstrap/Tab";
-import Tabs from "react-bootstrap/Tabs";
 import { UserPage } from "../components/AdminComponents/userPage/UserPage";
-import { CreateNewCourse } from "../components/AdminComponents/CreateNewCourse";
-import { MultiCourseAndBlockPage } from "../components/AdminComponents/MultiCourseAndBlockPage/MultiCourseAndBlockPage";
 import { NavAdmin } from "../components/AdminComponents/NavAdmin";
 
 const Admin = () => {
-  const [key, setKey] = useState("users");
 
-  const { course } = useContext(Context);
-
-  useEffect(() => {
-    getAll().then((data) => course.setCourse(data.data));
-  }, []);
   return (
     <>
       <NavAdmin />

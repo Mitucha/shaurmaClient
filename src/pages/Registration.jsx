@@ -41,6 +41,8 @@ const Registration = observer(() => {
         user.setUser(response.data);
         user.setIsAuth(response.data.access);
         user.setRole(response.data.id_role);
+        localStorage.setItem('level', response.data.level)
+        localStorage.setItem('id_user', response.data.id)
         if (response.data.access === true && response.data.id_role == 1){history.push(ADMIN_ROUTE)}
         if (response.data.access === true && response.data.id_role != 1) {
           history.push(COURSE_ROUTE);

@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
+import { Context } from "../../main";
+import { getAll } from "../../http/CourseAPI";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import Nav from 'react-bootstrap/Nav';
 
 const NavAdmin = () => {
+
+  const { course } = useContext(Context);
+
+  useEffect(() => {
+    getAll().then((data) => course.setCourse(data.data));
+  }, []);
+
   return (
     <Nav
       variant="tabs"

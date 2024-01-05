@@ -28,8 +28,6 @@ const Header = observer(() => {
         <>
         <Nav className="me-auto">
         <Nav.Link as={Link} to="/course">Курсы</Nav.Link>
-        <Nav.Link>Новости</Nav.Link>
-        <Nav.Link>О нас</Nav.Link>
       </Nav>
       <Nav.Link as={Link} to={REGISTRATION_ROUTE} onClick={() => exit()}><Button variant="outline-warning">Выйти</Button></Nav.Link></>
     :

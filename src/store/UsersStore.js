@@ -13,4 +13,7 @@ export default class UsersStore {
     get allUsers() {
         return this._users
     }
+    usersByRole() {
+        
+    }
 }

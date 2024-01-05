@@ -16,3 +16,13 @@ export const createCourse = async (formData) => {
     
 }
 
+export const updateCourse = async (id, title, description, id_role) => {
+    const response = await $authHost.put('api/course/update', {id, title, description, id_role})
+    return response
+}
+
+export const deleteCourse = async (id) => {
+    const response = await $authHost.delete('api/course/delete?id=' + id)
+    return response
+}
+

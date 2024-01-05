@@ -9,7 +9,7 @@ export const ADMIN_CASHIER_BLOCKS = '/admin/blocks';
 export const ADMIN_ITEMS = '/admin/item';
 
 export const LOGIN_ROUTE = '/login';
-export const REGISTRATION_ROUTE = '/registration';
+export const REGISTRATION_ROUTE = '/';
 export const COURSE_ROUTE = '/course';
 export const BLOCK_ROUTE = '/block';
 export const ITEM_ROUTE = '/item';

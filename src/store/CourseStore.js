@@ -25,4 +25,8 @@ export default class CourseStore {
         return this._course.filter(x => x.id_role == id)
         
     }
+
+    deleteCourse(id) {
+        this._course = this._course.filter(x => x.id != id)
+    }
 }
