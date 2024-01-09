@@ -10,7 +10,7 @@ import { destroy, update } from "../../../http/UserAPI";
 import { observer } from "mobx-react-lite";
 
 const UserCard = observer((props) => {
-  const { id, name, email, password, id_role, access } = props.info;
+  const { id, name, email, password, id_role, access, level } = props.info;
   const role = [
     "Администратор",
     "Кассир",
@@ -52,6 +52,7 @@ const UserCard = observer((props) => {
         <Card.Body>
           <Card.Title>{name}</Card.Title>
           <Card.Text>{email}</Card.Text>
+          {id_role != 1 ? <Card.Text>Курс: {JSON.parse(level)[0]} Блок: {JSON.parse(level)[1]}</Card.Text> : ''}
           <Button variant="outline-primary" onClick={handleShow}>
             Изменить
           </Button>

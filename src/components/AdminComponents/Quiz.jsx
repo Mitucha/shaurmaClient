@@ -5,17 +5,42 @@ import Alert from 'react-bootstrap/Alert';
 import style from "../../styles/quiz.module.css";
 import { updateLevel } from "../../http/UserAPI";
 
-const QuizItem = ({ question, onClickVariant }) => { 
+const QuizItem = ({ length, question, onClickVariant }) => { 
+  const [indexx, setIndex] = useState(0)
   return (
     <Modal.Body>
+      <span>{Math.ceil(indexx / length * 100)}%</span>
+      <div style={{width: '100%', height: '10px', backgroundColor: '#b4b0b09f', marginBottom: '25px', borderRadius: '3px'}}>
+        <div style={{width: `${indexx / length * 100}%`, height: '10px',borderRadius: '3px', background: 'linear-gradient(90deg, rgba(14,66,6,1) 0%, rgba(68,240,75,1) 45%, rgba(0,255,201,1) 100%)'}}></div>
+      </div>
       <h6 key={question.title}>{question.title}</h6>
       <ul style={{ listStyleType: "none", margin: "0 auto" }}>
         {console.log(question.variant)}
         {question.variant.map((item, index) => (
           <li
-            key={item}
+            key={index}
             className={style.li}
-            onClick={() => onClickVariant(index)}
+            onClick={(e) => {
+              if (index == question.correct) {
+                e.target.style.background = 'green'
+                e.target.style.color = 'white'
+                setTimeout(() => {
+                  e.target.style.background = 'rgba(0, 0, 0, 0)'
+                  e.target.style.color = 'black'
+                }, 500)
+              }
+              else {
+                e.target.style.background = '#ae03038c'
+                e.target.style.color = 'white'
+                setTimeout(() => {
+                  e.target.style.background = 'rgba(0, 0, 0, 0)'
+                  e.target.style.color = 'black'
+                }, 500)
+              }
+              setIndex(indexx + 1)
+              onClickVariant(index)
+            }
+          }
           >
             {item}
           </li>
@@ -52,13 +77,19 @@ const Result = ({ correct, length }) => {
       }
     }
   }
+
+  const ref = React.useRef(null)
   
   return (
     <Modal.Body>
-      <h4>Вопросов: {length}</h4>
-      <h4>Правильных ответов: {correct}</h4>
+      
+      <h1 style={{textAlign: 'center', margin: '20px'}}>{correct}/{length}</h1>
 
-        {length - correct == 0 ? <Alert variant='success'>Вы молодец! Продолжайте в том же духе <Button onClick={() => levelUp()}>Подтвердить</Button></Alert> : <Alert  variant='danger'>Подучите и вернитесь позже</Alert>}
+        {length - correct == 0 ? <Alert variant='success'>Вы молодец! Продолжайте в том же духе <Button ref={ref} onClick={() => {
+          levelUp()
+          ref.current.disabled = true
+        }
+        }>Подтвердить</Button></Alert> : <Alert  variant='danger'>Подучите и вернитесь позже</Alert>}
       
     </Modal.Body>
   );
@@ -75,19 +106,35 @@ const Quiz = ({test}) => {
   //=========================================================================================
   const question = test[step];
 
-  function onClickVariant(index) {
-    setStep(step + 1);
-    if (index == question.correct) {
-      setCorrect(correct + 1);
-    }
+  const onClickVariant = (index) => {
+    setTimeout(() => {
+      setStep(step + 1);
+      if (index == question.correct) {
+        setCorrect(correct + 1);
+      }
+    },700)
   }
 
   // Считаем правильные ответы===============================================================
   const [correct, setCorrect] = useState(0);
+  const ref = React.useRef(null)
+
+  React.useEffect(() => {
+    if (JSON.parse(localStorage.getItem('index_course')) < JSON.parse(localStorage.getItem('level'))[0] || JSON.parse(localStorage.getItem('index_block')) < JSON.parse(localStorage.getItem('level'))[1]) {
+      ref.current.disabled = true
+    }
+  }, [])
+  
 
   return (
     <div className="container" style={{ margin: "0 auto" }}>
-      <Button variant="primary" onClick={handleShow} style={{ width: "100%" }}>
+      <Button variant="primary" ref={ref} onClick={() => {
+        handleShow()
+        console.log(JSON.parse(localStorage.getItem('level'))[0])
+        if (JSON.parse(localStorage.getItem('index_course')) < JSON.parse(localStorage.getItem('level'))[0] || JSON.parse(localStorage.getItem('index_block')) < JSON.parse(localStorage.getItem('level'))[1]) {
+          ref.current.disabled = true
+        }
+      }} style={{ width: "100%" }}>
         Пройти тестирование
       </Button>
 
@@ -96,7 +143,7 @@ const Quiz = ({test}) => {
           <Modal.Title style={{ fontSize: "14px" }}>Тестирование</Modal.Title>
         </Modal.Header>
         {step != test.length ? (
-          <QuizItem question={question} onClickVariant={onClickVariant} />
+          <QuizItem length={test.length} question={question} onClickVariant={onClickVariant} />
         ) : (
           <Result correct={correct} length={test.length} />
         )}

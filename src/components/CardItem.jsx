@@ -75,6 +75,7 @@ const CardItem = observer((props) => {
                 variant="outline-primary"
                 onClick={() => {
                   localStorage.setItem("id_course", JSON.stringify(id));
+                  localStorage.setItem("index_course", JSON.stringify(index));
                 }}
                 disabled={level[0] < index ? true : false}
               >

@@ -19,3 +19,7 @@ export const addFile = async (formData) => {
     const response = await $host.post('api/item/addFile', formData)
     return response
 }
+
+export const updateItemString = async (id, item) => {
+    const respons = await $host.post('api/item/updateItemString', {id, item})
+}

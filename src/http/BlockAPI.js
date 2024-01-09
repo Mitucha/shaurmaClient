@@ -20,3 +20,8 @@ export const quantityByCourse = async (id_parent) => {
     const response = await $authHost.get('api/block/quantityByCourse?id_parent=' + id_parent)
     return response
 }
+
+export const updateBlock = async (id, title, description, id_parent) => {
+    const response = await $authHost.post('api/block/update', {id, title, description, id_parent})
+    return response
+}

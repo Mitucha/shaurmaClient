@@ -17,7 +17,8 @@ const CreateFile = () => {
         <div className="container">
             <h5>Добавить файл</h5>
             <input type="file" onChange={(e) => setFile(e.target.files[0])} />
-            <Button variant="outline-primary" onClick={submitFile}>Добавить</Button>
+            <Button variant="outline-primary" onClick={submitFile}>Отправить</Button>
+
         </div>
     )
 }

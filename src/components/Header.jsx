@@ -27,7 +27,7 @@ const Header = observer(() => {
         {JSON.parse(localStorage.getItem('isAuth')) ? 
         <>
         <Nav className="me-auto">
-        <Nav.Link as={Link} to="/course">Курсы</Nav.Link>
+        
       </Nav>
       <Nav.Link as={Link} to={REGISTRATION_ROUTE} onClick={() => exit()}><Button variant="outline-warning">Выйти</Button></Nav.Link></>
     :

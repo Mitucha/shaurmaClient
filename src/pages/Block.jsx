@@ -18,9 +18,12 @@ const Block = observer(() => {
     getBlock(localStorage.getItem('id_course')).then(data => block.setBlock(data.data))
     quantityByCourse(JSON.parse(localStorage.getItem('id_course'))).then(data => setMaxLevel(data.data))
   }, [])
+  
 
+  console.log("MaxLevel: ", maxLevel)
+  localStorage.setItem('maxLevel', maxLevel)
     return(
-      <div className='container mt-4' style={{}}>{console.log(maxLevel)}
+      <div className='container mt-4' style={{}}>
         <NavLink to="/course" ><Button variant="light">Назад</Button></NavLink>
         {block.block.length == 0 ? <BlankPage /> : block.block.map((item, index) => <BlockItem maxLevel={maxLevel} key={index} index={index} info={item}/>)}
       </div>
